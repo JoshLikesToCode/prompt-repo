@@ -1,0 +1,188 @@
+:root {
+  --bg: #f7f7f8;
+  --surface: #ffffff;
+  --border: #e2e2e6;
+  --text: #1c1c1f;
+  --text-muted: #6b6b74;
+  --accent: #4f46e5;
+  --star: #d8d8de;
+  --star-filled: #f5b301;
+  --radius: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.app-main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.add-prompt h2,
+.prompt-list-section h2 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+#prompt-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+#prompt-form label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+#prompt-form input,
+#prompt-form textarea {
+  font: inherit;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  resize: vertical;
+}
+
+#prompt-form button {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#prompt-form button:hover {
+  filter: brightness(1.08);
+}
+
+.prompt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.prompt-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+}
+
+.prompt-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.prompt-title {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.delete-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+}
+
+.delete-btn:hover {
+  color: #d33;
+  background: #fdecec;
+}
+
+.prompt-preview {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin: 0.4rem 0 0.7rem;
+  white-space: pre-wrap;
+}
+
+.stars {
+  display: flex;
+  gap: 0.15rem;
+  margin-bottom: 0.6rem;
+}
+
+.star-btn {
+  border: none;
+  background: transparent;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--star);
+  cursor: pointer;
+  padding: 0.1rem;
+}
+
+.star-btn.filled {
+  color: var(--star-filled);
+}
+
+.star-btn:hover,
+.star-btn:focus-visible {
+  color: var(--star-filled);
+  outline: none;
+}
+
+.prompt-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.copy-btn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  background: var(--bg);
+}
+
+.empty-state {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
