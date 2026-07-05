@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prompt Library</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Prompt Library</h1>
+  </header>
+
+  <main class="app-main">
+    <section class="add-prompt">
+      <h2>Add a prompt</h2>
+      <form id="prompt-form">
+        <label for="prompt-title">Title</label>
+        <input id="prompt-title" name="title" type="text" required maxlength="120" placeholder="e.g. Blog Outline Generator" />
+
+        <label for="prompt-content">Content</label>
+        <textarea id="prompt-content" name="content" required rows="6" placeholder="You are an expert..."></textarea>
+
+        <button type="submit">Add Prompt</button>
+      </form>
+    </section>
+
+    <section class="prompt-list-section">
+      <h2>Prompts</h2>
+      <div id="prompt-list" class="prompt-list"></div>
+      <p id="empty-state" class="empty-state" hidden>No prompts yet. Add one above to get started.</p>
+    </section>
+  </main>
+
+  <template id="prompt-card-template">
+    <article class="prompt-card" data-prompt-id="">
+      <div class="prompt-card-header">
+        <h3 class="prompt-title"></h3>
+        <button type="button" class="delete-btn" aria-label="Delete prompt">&times;</button>
+      </div>
+      <p class="prompt-preview"></p>
+      <div class="prompt-actions">
+        <button type="button" class="copy-btn">Copy</button>
+      </div>
+
+      <div class="notes-section">
+        <div class="notes-header">
+          <h4>Notes</h4>
+          <button type="button" class="add-note-btn">+ Add note</button>
+        </div>
+        <div class="note-form" hidden>
+          <textarea class="note-input" rows="2" placeholder="Add a note..."></textarea>
+          <div class="note-form-actions">
+            <button type="button" class="note-save-btn">Save</button>
+            <button type="button" class="note-cancel-btn">Cancel</button>
+          </div>
+        </div>
+        <ul class="notes-list"></ul>
+      </div>
+    </article>
+  </template>
+
+  <template id="note-item-template">
+    <li class="note-item" data-note-id="">
+      <p class="note-text"></p>
+      <div class="note-meta">
+        <span class="note-timestamp"></span>
+        <div class="note-item-actions">
+          <button type="button" class="note-edit-btn">Edit</button>
+          <button type="button" class="note-delete-btn">Delete</button>
+        </div>
+      </div>
+    </li>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
