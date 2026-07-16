@@ -11,6 +11,7 @@ let notesByPromptId = loadJSON(NOTES_STORAGE_KEY, {});
 const listEl = document.getElementById('prompt-list');
 const emptyStateEl = document.getElementById('empty-state');
 const formEl = document.getElementById('prompt-form');
+const formErrorEl = document.getElementById('form-error');
 const cardTemplate = document.getElementById('prompt-card-template');
 const noteItemTemplate = document.getElementById('note-item-template');
 
@@ -43,14 +44,27 @@ function handleAddPrompt(event) {
   event.preventDefault();
   const formData = new FormData(formEl);
   const title = formData.get('title').trim();
+  const model = formData.get('model').trim();
   const content = formData.get('content').trim();
   if (!title || !content) return;
+
+  let metadata;
+  try {
+    metadata = trackModel(model, content);
+  } catch (err) {
+    formErrorEl.textContent = err.message;
+    formErrorEl.hidden = false;
+    return;
+  }
+
+  formErrorEl.hidden = true;
 
   prompts.unshift({
     id: makeId(),
     title,
     content,
     createdAt: Date.now(),
+    metadata,
   });
 
   savePrompts();
@@ -124,7 +138,13 @@ function render() {
   listEl.innerHTML = '';
   emptyStateEl.hidden = prompts.length > 0;
 
-  for (const prompt of prompts) {
+  const sorted = [...prompts].sort((a, b) => {
+    const aTime = a.metadata ? Date.parse(a.metadata.createdAt) : a.createdAt;
+    const bTime = b.metadata ? Date.parse(b.metadata.createdAt) : b.createdAt;
+    return bTime - aTime;
+  });
+
+  for (const prompt of sorted) {
     listEl.appendChild(buildCard(prompt));
   }
 }
@@ -136,6 +156,8 @@ function buildCard(prompt) {
 
   node.querySelector('.prompt-title').textContent = prompt.title;
   node.querySelector('.prompt-preview').textContent = truncate(prompt.content, PREVIEW_LENGTH);
+
+  renderMetadata(node, prompt.metadata);
 
   node.querySelector('.delete-btn').addEventListener('click', () => deletePrompt(prompt.id));
   node.querySelector('.copy-btn').addEventListener('click', (e) => flashCopied(e.target, () => copyPrompt(prompt.id)));
@@ -240,6 +262,33 @@ function startEditingNote(item, textEl, promptId, note, editBtn) {
 
   cancelBtn.addEventListener('click', () => {
     renderNotes(promptId);
+  });
+}
+
+function renderMetadata(node, metadata) {
+  const container = node.querySelector('.prompt-metadata');
+  if (!metadata) {
+    container.hidden = true;
+    return;
+  }
+
+  node.querySelector('.meta-model').textContent = metadata.model;
+
+  const created = formatHumanDate(metadata.createdAt);
+  const updated = formatHumanDate(metadata.updatedAt);
+  node.querySelector('.meta-timestamps').textContent =
+    metadata.createdAt === metadata.updatedAt ? `Created ${created}` : `Created ${created} · Updated ${updated}`;
+
+  const { min, max, confidence } = metadata.tokenEstimate;
+  const tokensEl = node.querySelector('.meta-tokens');
+  tokensEl.textContent = `~${min}–${max} tokens`;
+  tokensEl.classList.add('confidence-badge', `confidence-${confidence}`);
+}
+
+function formatHumanDate(isoString) {
+  return new Date(isoString).toLocaleString(undefined, {
+    dateStyle: 'medium',
+    timeStyle: 'short',
   });
 }
 

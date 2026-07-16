@@ -18,10 +18,14 @@
         <label for="prompt-title">Title</label>
         <input id="prompt-title" name="title" type="text" required maxlength="120" placeholder="e.g. Blog Outline Generator" />
 
+        <label for="prompt-model">Model</label>
+        <input id="prompt-model" name="model" type="text" required maxlength="100" placeholder="e.g. gpt-4o-mini" />
+
         <label for="prompt-content">Content</label>
         <textarea id="prompt-content" name="content" required rows="6" placeholder="You are an expert..."></textarea>
 
         <button type="submit">Add Prompt</button>
+        <p id="form-error" class="form-error" hidden></p>
       </form>
     </section>
 
@@ -39,6 +43,13 @@
         <button type="button" class="delete-btn" aria-label="Delete prompt">&times;</button>
       </div>
       <p class="prompt-preview"></p>
+
+      <div class="prompt-metadata">
+        <span class="meta-model"></span>
+        <span class="meta-timestamps"></span>
+        <span class="meta-tokens"></span>
+      </div>
+
       <div class="prompt-actions">
         <button type="button" class="copy-btn">Copy</button>
       </div>
@@ -73,6 +84,7 @@
     </li>
   </template>
 
+  <script src="metadata.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
