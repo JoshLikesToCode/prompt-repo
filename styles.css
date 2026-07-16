@@ -48,6 +48,53 @@ body {
   margin-bottom: 0.75rem;
 }
 
+.prompt-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.prompt-list-header h2 {
+  margin-bottom: 0;
+}
+
+.io-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.io-actions button {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.io-actions button:hover {
+  background: var(--bg);
+}
+
+.io-status {
+  margin: -0.4rem 0 0.9rem;
+  font-size: 0.85rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 6px;
+}
+
+.io-status-success {
+  background: #e3f6e8;
+  color: #1e7d38;
+}
+
+.io-status-error {
+  background: #fbe4e2;
+  color: #b3261e;
+}
+
 #prompt-form {
   display: flex;
   flex-direction: column;
@@ -140,6 +187,10 @@ body {
   font-size: 0.92rem;
   margin: 0.4rem 0 0.7rem;
   white-space: pre-wrap;
+}
+
+.prompt-metadata[hidden] {
+  display: none;
 }
 
 .prompt-metadata {
@@ -342,4 +393,131 @@ body {
 
 .note-delete-btn:hover {
   color: #d33;
+}
+
+/* Import conflict dialog */
+
+.conflict-dialog {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  max-width: 480px;
+  width: 90vw;
+}
+
+.conflict-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.conflict-dialog h3 {
+  margin: 0 0 0.5rem;
+}
+
+.conflict-dialog p {
+  margin: 0 0 1rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.conflict-bulk-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.conflict-bulk-actions button {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.conflict-bulk-actions button:hover {
+  background: var(--bg);
+}
+
+.conflict-list {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  max-height: 40vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.conflict-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: var(--bg);
+  border-radius: 6px;
+  padding: 0.5rem 0.6rem;
+}
+
+.conflict-item-label {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.conflict-item-label strong {
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conflict-item-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conflict-resolution-select {
+  font: inherit;
+  font-size: 0.82rem;
+  padding: 0.3rem 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.conflict-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.conflict-dialog-actions button {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+#conflict-confirm-btn {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+  font-weight: 600;
+}
+
+#conflict-confirm-btn:hover {
+  filter: brightness(1.08);
+}
+
+#conflict-cancel-btn:hover {
+  background: var(--bg);
 }

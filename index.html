@@ -30,7 +30,15 @@
     </section>
 
     <section class="prompt-list-section">
-      <h2>Prompts</h2>
+      <div class="prompt-list-header">
+        <h2>Prompts</h2>
+        <div class="io-actions">
+          <button type="button" id="export-btn">Export</button>
+          <button type="button" id="import-btn">Import</button>
+          <input type="file" id="import-file-input" accept="application/json" hidden />
+        </div>
+      </div>
+      <p id="io-status" class="io-status" hidden></p>
       <div id="prompt-list" class="prompt-list"></div>
       <p id="empty-state" class="empty-state" hidden>No prompts yet. Add one above to get started.</p>
     </section>
@@ -84,7 +92,24 @@
     </li>
   </template>
 
+  <dialog id="import-conflict-dialog" class="conflict-dialog">
+    <h3>Resolve import conflicts</h3>
+    <p>These prompts already exist in your library. Choose how to handle each one, or apply one choice to all.</p>
+    <div class="conflict-bulk-actions">
+      <span>Apply to all:</span>
+      <button type="button" data-bulk="skip">Keep existing</button>
+      <button type="button" data-bulk="replace">Replace</button>
+      <button type="button" data-bulk="duplicate">Keep both</button>
+    </div>
+    <ul id="conflict-list" class="conflict-list"></ul>
+    <div class="conflict-dialog-actions">
+      <button type="button" id="conflict-cancel-btn">Cancel</button>
+      <button type="button" id="conflict-confirm-btn">Import</button>
+    </div>
+  </dialog>
+
   <script src="metadata.js"></script>
   <script src="app.js"></script>
+  <script src="export-import.js"></script>
 </body>
 </html>
